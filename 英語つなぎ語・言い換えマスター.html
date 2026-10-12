@@ -1,0 +1,288 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>英語つなぎ語・言い換えマスター</title>
+<style>
+:root{--bg:#faf8f5;--fg:#222;--cd:#fff;--bd:#d8d4cc;--ac:#c2185b;--ok:#2e7d32;--ng:#c62828;--mu:#777;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#1b1b1d;--fg:#eee;--cd:#27272a;--bd:#444;--ac:#f06292;--ok:#66bb6a;--ng:#ef5350;--mu:#aaa}}
+:root[data-theme=dark]{--bg:#1b1b1d;--fg:#eee;--cd:#27272a;--bd:#444;--ac:#f06292;--ok:#66bb6a;--ng:#ef5350;--mu:#aaa}
+html,body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,"Hiragino Sans","Noto Sans JP",sans-serif}
+#app{max-width:640px;margin:0 auto;padding:14px}
+h1{font-size:20px;margin:6px 0}.mu{color:var(--mu);font-size:13px}
+.card{background:var(--cd);border:1px solid var(--bd);border-radius:12px;padding:12px;margin:10px 0}
+.bar{height:6px;background:var(--bd);border-radius:3px;overflow:hidden;margin:6px 0}.bar i{display:block;height:100%;background:var(--ac)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chip{border:1px solid var(--bd);border-radius:16px;padding:4px 10px;font-size:13px;cursor:pointer;background:var(--cd);color:var(--fg)}
+.chip.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+button{font:inherit;color:var(--fg)}
+.btn{background:var(--ac);color:#fff;border:0;border-radius:10px;padding:12px;width:100%;margin:5px 0;font-weight:700;cursor:pointer}
+.btn.s{background:var(--cd);color:var(--fg);border:1px solid var(--bd)}
+.g{background:none;border:0;font-size:18px;cursor:pointer}
+.top{display:flex;justify-content:space-between;align-items:center}
+.q{font-size:19px;font-weight:700;white-space:pre-line;overflow-wrap:anywhere}
+.badge{display:inline-block;background:var(--ac);color:#fff;border-radius:6px;font-size:12px;padding:1px 8px;margin-bottom:6px}
+.opts{display:grid;gap:8px}
+.opts button{background:var(--cd);border:1px solid var(--bd);border-radius:10px;padding:12px;text-align:left;cursor:pointer;overflow-wrap:anywhere}
+.opts button.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 20%,var(--cd))}
+.opts button.ng{border-color:var(--ng);background:color-mix(in srgb,var(--ng) 20%,var(--cd))}
+.fb{white-space:pre-line;font-size:14px}.r{display:flex;justify-content:space-between;gap:8px;border-bottom:1px solid var(--bd);padding:6px 0;font-size:14px}
+.r span:last-child{text-align:right;color:var(--mu)}
+.hero{background:linear-gradient(135deg,var(--ac),#7b1fa2);color:#fff;border-radius:16px;padding:18px;margin:6px 0 12px}
+.hero h1{margin:0 0 4px;font-size:22px}.hero .mu{color:#fff;opacity:.88}
+.card{box-shadow:0 1px 3px rgba(0,0,0,.07)}
+.dk{border-left:5px solid var(--c,var(--ac))}
+.bar i{background:var(--c,var(--ac));transition:width .3s}
+.opts button{display:flex;gap:12px;align-items:center;font-size:16px;min-height:54px;transition:transform .1s}
+.opts button:active{transform:scale(.98)}
+.opts button b{flex:none;width:26px;height:26px;border-radius:50%;background:var(--bd);display:grid;place-items:center;font-size:13px}
+.opts button.ok b{background:var(--ok);color:#fff}.opts button.ng b{background:var(--ng);color:#fff}
+.q{font-size:22px;line-height:1.4}
+.fb{animation:up .2s}@keyframes up{from{opacity:0;transform:translateY(6px)}}
+.cnt .chip{min-width:46px;text-align:center;padding:6px 12px;font-size:15px}
+.sticky{position:sticky;bottom:0;padding:8px 0 6px;background:linear-gradient(transparent,var(--bg) 35%)}
+.stars{color:#f9a825;letter-spacing:2px}
+</style></head><body><div id="app"></div><script>
+const CD=`
+逆接|副|however=しかしながら;nevertheless=それにもかかわらず;nonetheless=それにもかかわらず;instead=その代わりに;in fact=(それどころか)実際は;as a matter of fact=実際は;on the contrary=それどころか;(but) still=それでも;conversely=逆に;oppositely=逆に;on (the) one hand=一方では;on the other hand=他方では
+逆接|接|but=しかし;though=～だけれども;although=～だけれども;even if [though]=たとえ～でも;whereas=～だが一方;while=～だけれども;It is true ～ but …=なるほど～だがしかし;of course ～ but …=もちろん～しかし;granted [granting] that=かりに～だとしても
+逆接|前|in spite of=～にもかかわらず;despite=～にもかかわらず;with all=～にもかかわらず;for all=～にもかかわらず
+因果:原因→結果|接|so that=それで;with the result that=その結果～ということになる;This is why=こういうわけで～
+因果:結果→原因|接|because=なぜなら～だから;as=～なので;since=～だから;for=というのは～だから;now (that)=今はもう～だから;This is because=これはなぜかというと
+因果:原因→結果|副|so=それで;thus=したがって;therefore=故に;hence=そのため;as a result=結果として;consequently=その結果;in consequence=その結果;accordingly=それ故に
+因果:原因→結果|動|cause=の原因となる;bring about=を引き起こす;lead to=を引き起こす;end in=で終わる;result in=という結果になる;account for=の理由を説明する;contribute to=に寄与する;amount to=(好ましくないこと)になる;give rise to=を引き起こす;arouse=を引き起こす;trigger=の引き金となる;be responsible for=に責任がある
+因果:結果→原因|動|come from=に由来する;result from=から生じる;arise from=に起因する;originate from=に由来する;be due to=が原因で
+因果:結果→原因|前|because of=～のため;owing to=～のために;on account of=～のために;due to=～のために;thanks to=～のおかげで;by virtue of=～のおかげで;as a result of=～の結果として;as a consequence of=～の結果として;in consequence of=～の結果として
+追加・類比|副|also=～もまた;too=～もまた;as well=～もまた;besides=さらに;furthermore=さらに;moreover=さらに;what is more=おまけに;additionally=さらに;at the same time=同時に;on top of that=そのうえ;likewise=同様に;similarly=同様に;alike=同様に;correspondingly=同様に;equally=等しく;in the same way=同じように
+追加・類比|群|in addition (to)=(～に)加えて;to say nothing of=～は言うまでもなく;not to speak of=～は言うまでもなく
+例示・換言・要約||that is (to say)=すなわち;namely=すなわち;in short=要するに;in brief=要するに;in a word=ひと言で言えば;in a sense=ある意味では;to sum up=要約すれば;to summarize=手短に述べると;to make a long story short=かいつまんで言うと;above all=とりわけ;say=例えば;for example=例えば;for instance=例えば;to give an example=例を挙げると;specifically=特に;to illustrate=例を挙げて説明すると;such as=～など;like=～のような;including=～を含めて;in other words=言い換えると;I mean=つまり;That means that S'+V'=それは～を意味する;to put it another way=それを別の言い方をすれば
+順序||first(ly) ～ second(ly) … finally=最初に～次に…最後に;for one thing ～ for another …=1つには～もう1つには…;first of all=まず第一に;at first=初めは;to begin with=最初は;in the beginning=最初に;in the first place=第一に;in the second place=第二に;next=次に;later=後になって;finally / lastly / eventually=最後に;in the end=最後に;at last=ついに;the former ～ , the latter …=前者は～後者は…
+強調||indeed=本当に;actually=実際は;in effect=実際には;surely=確かに;obviously=明らかに;not to mention=～は言うまでもなく;especially / in particular=特に;of course=もちろん
+話題の転換||by the way=ところで;incidentally=ついでながら;to change the subject=話は変わるけど;now=さあ,ところで;then=それから;meanwhile / in the meantime=その間に,一方では
+一般化||generally (speaking) / in general / by and large=一般的に;on the whole=全体的に見て;as a (general) rule=概して,原則として;in most cases=たいていの場合;mostly=主に,たいていは;usually=普通は,通例;broadly [roughly] speaking=大まかに言えば
+結論||in conclusion=結論として;to conclude=最後に;it follows that ～=(必然的に)～ということになる;at any rate=少なくとも;at all events=とにかく,いずれにしても;anyway=いずれにせよ,ともかく;after all=結局;in the last [final] analysis=とどのつまり;all in all=全体として見れば;based on the above ～=上記の～に基づいて;judging from the above ～=上記の～から判断すると
+焦点||speaking of ～ / talking of ～=～と言えば;as for ～=～について言えば;with[in] reference to ～=～に関して
+説得||look=ねえ
+`;
+const PD=`
+above all|especially/in particular/particularly|なによりもまず|a
+account for ～|explain|～を説明する|v
+add to ～|increase|～を増す|v
+all at once|suddenly/all of a sudden|突然|a
+all the same|nevertheless/just the same|それでもやはり|a
+all the time|always/continuously/constantly|いつも|a
+amount to ～|total|合計～になる|v
+apart from ～|except (for) ～|～を除いては|p
+as good as ～|almost/practically|～も同然で|a
+as it were|so to speak/what we call/what is called|いわば,いわゆる|a
+as long as ～|if ～|～する限りは|c
+as to ～|about/concerning/regarding|～について|p
+at times|sometimes/from time to time/now and then/on occasion(s)|時々|a
+because of ～|on account of ～/owing to ～/due to ～|～のために(理由)|p
+before long|soon/it will not be long before|まもなく|a
+beside the point|irrelevant|見当違いで|j
+break down ～|destroy|～を壊す|v
+break in[cut in]|interrupt|口を挟む|v
+break out|happen/occur/arise|起こる|v
+bring about ～|cause/give rise to ～/lead to ～|～を引き起こす|v
+bring up ～|raise/rear|～を育てる|v
+by and large|generally speaking/in general/on the whole/as a rule|一般的に|a
+by chance|accidentally/by accident|偶然に|a
+by degrees|gradually/little by little|徐々に|a
+by turns|alternately|代わる代わる|a
+call for ～|require/need/demand|～を要求する|v
+call off ～|cancel|～を中止する|v
+call up ～|telephone|～に電話する|v
+cannot help -ing|cannot but do/cannot help but do|～せざるを得ない|v
+care for ～|like|～を好む|v
+carry out ～|execute/fulfill/perform|～を実行する|v
+catch up with ～|overtake|～に追いつく|v
+come about|happen/occur|起こる|v
+come across ～|encounter/run across[into] ～|～に偶然出くわす|v
+come by ～|obtain/get|～を手に入れる|v
+come true|be realized|実現する|v
+come up with ～|find/think of ～|～を思いつく|v
+consist of ～|be made up of ～/be composed of ～|～から成る|v
+count on ～|depend on ～/rely on ～|～を頼りにする|v
+cut down ～|reduce/decrease|～を減らす|v
+deal with ～|treat/handle|～を扱う|v
+do away with ～|abolish/get rid of ～/put an end to ～|～を廃止する|v
+do without ～|dispense with ～|～なしですます|v
+far from ～|anything but ～/by no means|決して～ない|a
+figure out ～|understand|～を理解する|v
+find fault with ～|criticize|～のあら探しをする|v
+find out ～|discover|～を見つけ出す|v
+for good|forever/permanently|永遠に|a
+for nothing|for free|ただで|a
+get in touch with ～|contact/communicate with ～|～と連絡を取る|v
+get over ～|overcome/recover from ～|～に打ち勝つ|v
+get rid of ～|eliminate/remove|～を取り除く|v
+give in|yield/submit/surrender|屈する|v
+give off ～|emit|～を発する|v
+give up ～|stop/abandon|～をあきらめる|v
+go into ～|investigate|～を調べる|v
+go on|continue/keep on|続く|v
+go over ～|examine|～を調べる|v
+go through ～|undergo/experience/suffer|～を経験する|v
+go through with ～|finish/complete/accomplish|～をやり遂げる|v
+go with ～|match|～と釣り合う,調和する|v
+grow up|be brought up|成長する|v
+hand in ～|submit/turn in ～|～を提出する|v
+have ～ on|wear|～を身につけている|v
+ill at ease|uncomfortable/uneasy/nervous|不安な|j
+in a hurry|hastily|急いで|a
+in a row|continuously|連続して|a
+in addition to ～|besides ～|～に加えて|p
+in advance|beforehand|前もって|a
+in order to do|so as to do/with a view to -ing/for the purpose of -ing|～するために|a
+in other words|namely|つまり|a
+in short|briefly/in a word/to sum up|要するに|a
+in spite of ～|despite ～/for all ～/with all ～/notwithstanding ～|～にもかかわらず|p
+in the end|eventually/finally/in the long run|結局|a
+keep up ～|continue|～を続ける|v
+keep[bear] ～ in mind|remember|～を覚えておく|v
+kind of|somewhat/sort of|多少|a
+lay off ～|dismiss/fire|～を解雇する|v
+learn ～ by heart|memorize|～を暗記する|v
+leave out ～|omit/eliminate|～を除外する|v
+live up to ～|meet|(期待など)に応える|v
+look after ～|take care of ～/care for ～|～の世話をする|v
+look into ～|investigate|～を調査する|v
+look on[upon] A as B|regard A as B|AをBとみなす|v
+look up ～|check|(辞書などで)～を調べる|v
+look up to ～|respect|～を尊敬する|v
+make believe|pretend|～のふりをする|v
+make for ～|go toward ～|～の方へ進む|v
+make fun of ～|ridicule/laugh at ～|～をばかにする|v
+make out ～|understand/make sense of ～/comprehend/figure out ～|～を理解する|v
+make up ～|constitute|～を構成する|v
+make up for ～|compensate for ～|～の埋め合わせをする|v
+make up one's mind|decide/determine|決心する|v
+make use of ～|utilize/avail oneself of ～/take advantage of ～|～を利用する|v
+need -ing|want -ing|～される必要がある|v
+never fail to do|be sure to do|必ず～する|v
+no doubt|surely|きっと|a
+no less than ～|as much[many] as ～|～も|a
+no more than ～|only ～|たった～|a
+of + 抽象名詞 (例 of help)|形容詞 (例 helpful)|例)役に立つ|j
+of late|lately/recently|最近|a
+of one's own accord|voluntarily|自発的に|a
+on earth|in the world|一体全体|a
+on end|continuously|続けて|a
+on purpose|intentionally/deliberately|わざと|a
+on the spot|immediately/at once/right away|すぐに|a
+on time|punctually|時間通りに|a
+on -ing|as soon as ～/hardly[scarcely] ～ when/no sooner ～ than|～するとすぐに|c
+out of the question|impossible|論外の|j
+pass away|die|死ぬ|v
+pick out ～|choose|～を選び出す|v
+put aside ～|save/reserve|～を取っておく|v
+put off ～|postpone|～を延期する|v
+put on ～|gain|～を増す|v
+put out ～|extinguish/turn out ～|～を消す|v
+put together ～|assemble|～を組み立てる|v
+put up with ～|endure/bear/stand/tolerate/be patient with ～|～を我慢する|v
+quite a few (～)|a lot (of ～)/a good many (～)/numerous ～|多数(の～)|j
+refer to ～|consult|～を参照する|v
+rob A of B|deprive A of B|AからBを奪う|v
+run into[across] ～|come across ～|～にばったり会う|v
+run out of ～|exhaust/use up ～|～を使い果たす|v
+set in|begin/start|始まる|v
+set out|start|出発する|v
+set up ～|establish|～を設立する|v
+so far|up to now/till now|これまでのところ|a
+stand by ～|support|～を支持する|v
+stand for ～|represent/mean|～を表す|v
+stand out|be noticeable/be prominent|目立つ|v
+succeed to ～|inherit|～を相続する|v
+take after ～|resemble/look like ～/be like ～|～に似ている|v
+take in ～|deceive/cheat|～をだます|v
+take on ～|undertake|～を引き受ける|v
+take part in ～|participate in ～/join|～に参加する|v
+take place|happen/occur/come about|起こる(別)|v
+take the place of ～|replace|～に取って代わる|v
+take to ～|like|～を好きになる|v
+tell A from B|distinguish A from B|AとBを区別する|v
+tend to do|be apt to do/be liable to do/be likely to do|～する傾向がある|v
+that is (to say)|namely|すなわち|a
+think much of ～|value|～を尊重する|v
+think over ～|consider|～についてよく考える|v
+throw away ～|discard|～を捨てる|v
+to the point|relevant/to the purpose|適切な|j
+turn down ～|reject/refuse/decline|～を拒絶する|v
+turn out ～|prove|(結局)～だとわかる|v
+turn up|appear/show up|姿を見せる|v
+up to date|modern|最新の|j
+with + 抽象名詞 (例 with care)|副詞 (例 carefully)|例)注意深く|a
+without fail|surely|きっと|a
+work out ～|solve|～を解決する|v
+`;
+const KD=`
+目的|n|purpose=目的;aim=目標;end=目的,結果;goal=目標;task=課題;intention=意図;view=見解;object=目的;objective=目的
+目的|a|in order [so as] to do=～するために;for the purpose of -ing=～のために;with a view to -ing=～の目的で
+結果|n|result=結果;effect=効果;finding(s)=結果,結論;consequence=結果;solution=解決;conclusion=結論
+比較・変化|v|increase=増加(する);rise=上昇(する);grow=成長する;add=加える;go up=上がる;ascend=上昇する;multiply=増加する;double=倍増する;decrease=減少(する);fall=落ちる;reduce=減らす;decline=減少(する);drop=下降(する);go down=下がる;descend=下降する;diminish=減少する;improve=改善する;contrast=～を(…と)対比する;remain / stay=～のままである;compare=～を(…と)比較する;differ / vary=異なる
+対照|a|on the other hand=他方では;in contrast=対照的に;however=しかしながら
+程度|a|sharply=鋭く;dramatically=急激に;remarkably=著しく;constantly=常に;slightly=わずかに;relatively=比較的;frequently=頻繁に;increasingly=ますます;considerably=かなり;steadily=着実に;gradually=徐々に;rarely=まれに;seldom=めったに～ない;barely=かろうじて
+差異|n|variation=差異,変動
+差異|p|by=～だけ(差を表す)
+図表|n|table=表;chart=図表;figure=図形,数値;diagram=図表;list=一覧表;illustration=図;data=資料;graph=図表,グラフ;pie chart=円グラフ
+調査|n|experiment=実験;research=研究;survey=調査;study=研究;examination=検査;investigation=調査
+理由・原因|n|reason=理由;cause=原因;factor=要因
+理由・原因|v|be responsible for ～=～の原因である;be dependent on ～=～次第である;depend on ～=～次第である
+理由・原因|p|due to ～=～のために
+行う・調べる|v|carry out=遂行する;investigate=調査する;examine=検査する;conduct=実施する;inspect=検査する
+傾向|n|tendency=傾向;symptom=兆候;sign=兆候;indication=兆候
+傾向|v|be likely to do=～しそうである;tend to do=～する傾向にある
+手段|n|means=手段;method=方法;way=方法
+その他|n|amount=総計;degree=程度;range=範囲;percentage=百分率;proportion=比率;average=平均;frequency=頻度;rate=割合;total=合計;detail=詳細
+その他|a|about / around / approximately / roughly=約～
+`;
+const PNc={副:'副詞(句)',接:'接続詞(句)',前:'前置詞(句)',動:'動詞(句)',群:'群前置詞'},PNp={v:'動詞句',a:'副詞句',p:'前置詞句',j:'形容詞句',c:'接続詞句'},PNk={n:'名詞',v:'動詞',a:'副詞',p:'前置詞'};
+const NM={c:PNc,p:PNp,k:PNk},DN={c:'① つなぎ語(接続)',p:'② 言い換え熟語',k:'③ 図表・重要キーワード'};
+const TN={c:{cat:'種類を選ぶ',same:'同じ種類を選ぶ',mean:'表現→意味',rev:'意味→表現',pos:'品詞'},p:{para:'熟語→言い換え',prev:'言い換え→熟語',one:'1語の言い換え(動詞等)',part:'句動詞の小辞',mean:'熟語→意味',rev:'意味→熟語',pos:'品詞'},k:{mean:'語→意味',rev:'意味→語',pos:'品詞'}};
+const ALL={c:[],p:[],k:[]};
+CD.trim().split('\n').forEach(l=>{const[a,b,c]=l.split('|');c.split(';').forEach(s=>{const[e,m]=s.split('=');ALL.c.push({d:'c',cat:a,pos:b||0,e,m})})});
+PD.trim().split('\n').forEach(l=>{const[e,a,m,p]=l.split('|');ALL.p.push({d:'p',e,alts:a.split('/'),m,pos:p})});
+KD.trim().split('\n').forEach(l=>{const[g,p,c]=l.split('|');c.split(';').forEach(s=>{const[e,m]=s.split('=');ALL.k.push({d:'k',g,pos:p,e,m})})});
+const CATS=[...new Set(ALL.c.map(x=>x.cat))],PART='about up down off out in on over into through for with to away across after by of at'.split(' ');
+const R=a=>a[Math.random()*a.length|0],S=a=>[...a].sort(()=>Math.random()-.5);
+const pr=(a,f,p)=>[...S(a.filter(p)),...S(a.filter(x=>!p(x)))].map(f),dis=(p,n,b)=>[...new Set(p)].filter(x=>!b.includes(x)).slice(0,n);
+const key=i=>i.d+'|'+i.e,pn=i=>NM[i.d][i.pos]||'',sg=w=>!/[ ～\[]/.test(w);
+let M={},W={};try{M=JSON.parse(localStorage.getItem('m2')||'{}');W=JSON.parse(localStorage.getItem('w2')||'{}')}catch(e){}
+const save=()=>{try{localStorage.setItem('m2',JSON.stringify(M));localStorage.setItem('w2',JSON.stringify(W))}catch(e){}};
+const sc=i=>M[key(i)]||0;
+const TS=new Set(Object.entries(TN).flatMap(([d,o])=>Object.keys(o).map(t=>d+':'+t)));
+function gen(it,t){
+ const d=it.d,all=ALL[d],sm=all.filter(x=>x!==it&&x.m!=it.m),sp=x=>x.pos==it.pos,pc=x=>x.cat?x.cat==it.cat:sp(x);
+ const ex=d=='c'?`${it.e} ＝ ${it.m}\n種類：${it.cat}${it.pos?'／'+pn(it):''}`:d=='p'?`${it.e} ＝ ${it.alts.join(' / ')}\n意味：${it.m}／${pn(it)}`:`${it.e} ＝ ${it.m}\n${pn(it)}／${it.g}`;
+ const mk=(q,a,pool,ok)=>({q,a,ok:ok||[a],x:ex,b:t=='pos'?'':pn(it),o:S([a,...dis(pool,3,[a])])});
+ if(t=='mean')return mk(`「${it.e}」の意味は？`,it.m,pr(sm,x=>x.m,pc));
+ if(t=='rev')return mk(`「${it.m}」にあたる表現は？`,it.e,pr(sm,x=>x.e,pc),all.filter(x=>x.m==it.m).map(x=>x.e));
+ if(t=='pos'){if(!it.pos||it.pos=='群')return null;const P=Object.keys(NM[d]).filter(k=>k!='群'),N=NM[d],o=d=='p'?[it.pos,...S(P.filter(k=>k!=it.pos)).slice(0,3)]:P;return{q:`「${it.e}」の品詞は？`,a:N[it.pos],ok:[N[it.pos]],x:ex,b:'',o:S(o).map(k=>N[k])}}
+ if(t=='cat')return mk(`「${it.e}」はどの種類のつなぎ語？`,it.cat,CATS);
+ if(t=='same'){const c=R(sm.filter(x=>x.cat==it.cat));if(!c)return null;return mk(`「${it.e}」と同じ種類(働き)のつなぎ語は？`,c.e,pr(sm.filter(x=>x.cat!=it.cat),x=>x.e,()=>1),sm.filter(x=>x.cat==it.cat).map(x=>x.e))}
+ if(t=='para')return mk(`「${it.e}」の言い換えは？`,R(it.alts),pr(sm.filter(x=>!x.alts.some(y=>it.alts.includes(y))),x=>R(x.alts),sp),it.alts);
+ if(t=='prev'){const a=R(it.alts);return mk(`「${a}」と言い換えられる熟語は？`,it.e,pr(sm.filter(x=>!x.alts.includes(a)),x=>x.e,sp),all.filter(x=>x.alts.includes(a)).map(x=>x.e))}
+ if(t=='one'){const s=it.alts.filter(sg);if(!s.length)return null;return mk(`「${it.e}」を1語で言い換えると？`,R(s),pr(sm.filter(x=>!x.alts.some(y=>it.alts.includes(y))&&x.alts.some(sg)),x=>R(x.alts.filter(sg)),sp),s)}
+ if(t=='part'){const m=/^(\S+) (about|up|down|off|out|in|on|over|into|through|for|with|to|away|across|after|by|of|at)( |$)/.exec(it.e);if(!m||it.pos!='v')return null;return mk(`${m[1]} (　　) ${it.e.slice(m[0].length)}\n＝ ${it.m}（${it.alts[0]}）`,m[2],S(PART))}
+ return null}
+function pick(){const ds=Object.keys(TN).filter(d=>Object.keys(TN[d]).some(t=>TS.has(d+':'+t)));return ds}
+let Q=[],qi=0,okc=0,miss=[],N=10;
+function start(weak){
+ let pool=pick().flatMap(d=>ALL[d]);if(weak)pool=pool.filter(i=>W[key(i)]);
+ if(!pool.length){alert(weak?'苦手な項目はまだありません':'出題タイプを選んでください');return}
+ const sel=[];let p=[...pool];while(sel.length<Math.min(N||pool.length,pool.length)){const w=p.map(i=>4-sc(i)+(W[key(i)]?2:0)),tot=w.reduce((a,b)=>a+b,0);let r=Math.random()*tot,k=0;while(r>w[k]){r-=w[k];k++}sel.push(p.splice(k,1)[0])}
+ Q=[];sel.forEach(it=>{for(const t of S(Object.keys(TN[it.d]).filter(t=>TS.has(it.d+':'+t)))){const q=gen(it,t);if(q&&q.o.length>=3){q.it=it;Q.push(q);break}}});
+ qi=0;okc=0;miss=[];show()}
+const app=document.getElementById('app');
+function show(){const q=Q[qi];app.innerHTML=`<div class=top><button class=g onclick=home()>✕ やめる</button><span>${qi+1}/${Q.length}</span><span>正解 ${okc}</span></div><div class=bar><i style="width:${qi/Q.length*100}%"></i></div><div class=card>${q.b?`<span class=badge>${q.b}</span><br>`:''}<div class=q>${q.q}</div></div><div class=opts>${q.o.map((o,k)=>`<button onclick=ans(${k})><b>${'ABCDE'[k]}</b><span>${o}</span></button>`).join('')}</div><div id=fb class=fb></div>`}
+function ans(k){const q=Q[qi],ok=q.ok.includes(q.o[k]),it=q.it;
+ document.querySelectorAll('.opts button').forEach((b,j)=>{b.disabled=true;if(q.ok.includes(q.o[j]))b.classList.add('ok');else if(j==k)b.classList.add('ng')});
+ if(ok){okc++;M[key(it)]=Math.min(3,sc(it)+1);if(M[key(it)]>=3)delete W[key(it)]}else{M[key(it)]=0;W[key(it)]=1;miss.push(q)}save();
+ document.getElementById('fb').innerHTML=`<div class=card><b style="color:var(--${ok?'ok':'ng'})">${ok?'⭕ 正解！':'❌ 不正解'}</b>　習熟度 <span class=stars>${'★'.repeat(sc(it))}${'☆'.repeat(3-sc(it))}</span><br>${q.x}</div><div class=sticky><button class=btn onclick=nx()>${qi+1<Q.length?'次へ（Enter）':'結果を見る'}</button></div>`}
+function nx(){qi++;qi<Q.length?show():fin()}
+function fin(){app.innerHTML=`<h1>結果 ${okc}/${Q.length}</h1>${miss.length?`<div class=card><b>間違えた項目</b>${miss.map(q=>`<div class=r><span>${q.it.e}</span><span>${q.it.m}</span></div>`).join('')}</div>`:'<div class=card>全問正解！🎉</div>'}<button class=btn onclick=start(0)>もう一度</button><button class="btn s" onclick=start(1)>苦手だけ復習</button><button class="btn s" onclick=home()>ホームへ</button>`}
+function pct(d){const a=ALL[d];return Math.round(a.reduce((s,i)=>s+sc(i),0)/(3*a.length)*100)}
+function setN(n){N=n;home()}function tg(b,k){TS.has(k)?TS.delete(k):TS.add(k);b.classList.toggle('on')}
+function home(){const wn=Object.keys(W).length;app.innerHTML=`<div class=hero><h1>📘 英語 つなぎ語・言い換えマスター</h1><div class=mu>全${ALL.c.length+ALL.p.length+ALL.k.length}項目。各項目を★3(3回連続正解)にすると習得。間違えると★0に戻り優先出題されます。品詞つきで出題。</div></div><div class=card><b>1回の問題数</b><div class="chips cnt">${[5,10,20,30,50,0].map(n=>`<span class="chip ${N==n?'on':''}" onclick="setN(${n})">${n||'全部'}</span>`).join('')}</div></div>`+Object.keys(DN).map(d=>`<div class="card dk" style="--c:${{c:'#c2185b',p:'#1565c0',k:'#2e7d32'}[d]}"><b>${DN[d]}</b> <span class=mu>${ALL[d].length}項目・習熟 ${pct(d)}%</span><div class=bar><i style="width:${pct(d)}%"></i></div><div class=chips>${Object.entries(TN[d]).map(([t,n])=>`<span class="chip ${TS.has(d+':'+t)?'on':''}" onclick="tg(this,'${d}:${t}')">${n}</span>`).join('')}</div></div>`).join('')+`<button class=btn onclick=start(0)>${N||'全'}問スタート</button><button class="btn s" onclick=start(1)>苦手だけ出題（${wn}項目）</button><button class="btn s" onclick="list('c')">一覧を見る</button>`}
+function list(d){app.innerHTML=`<div class=top><button class=g onclick=home()>← 戻る</button></div><div class=chips>${Object.keys(DN).map(k=>`<span class="chip ${k==d?'on':''}" onclick="list('${k}')">${DN[k]}</span>`).join('')}</div><div class=card>${ALL[d].map(i=>`<div class=r><span>${i.e}<br><small class=mu>${i.cat||pn(i)}${i.g?'／'+i.g:''}${i.cat&&i.pos?'／'+pn(i):''}</small></span><span>${i.alts?i.alts.join(' / ')+'<br>':''}${i.m}<br>${'★'.repeat(sc(i))}${'☆'.repeat(3-sc(i))}</span></div>`).join('')}</div>`}
+home();
+document.addEventListener('keydown',e=>{const b=document.querySelectorAll('.opts button');if(b.length&&!b[0].disabled&&'12345'.includes(e.key)&&b[e.key-1])ans(e.key-1);else if(e.key=='Enter'){const n=document.querySelector('.sticky .btn');if(n)n.click()}});
+</script></body></html>
